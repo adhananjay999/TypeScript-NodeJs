@@ -51,18 +51,29 @@ class Animal {
   }
    
   class Snake extends Animal {
-    constructor(name: string) {
-      super(name);
+    constructor(name?: string) {
+        if(name){
+            super(name);
+        }else{
+            super("Sammy the Python");
+
+        }
     }
     move(distanceInMeters = 5) {
+
       console.log("Slithering...");
       super.move(distanceInMeters);
     }
   }
    
   class Horse extends Animal {
-    constructor(name: string) {
-      super(name);
+    constructor(name?: string) {
+        if(name){
+            super(name);
+        }else{
+            super("Tommy the Palomino");
+
+        }
     }
     move(distanceInMeters = 45) {
       console.log("Galloping...");
@@ -70,8 +81,13 @@ class Animal {
     }
   }
    
-  let sam = new Snake("Sammy the Python");
-  let tom: Animal = new Horse("Tommy the Palomino");
-   
-  sam.move();
-  tom.move(34);
+
+  let sammy = new Snake();
+  let tommy: Animal = new Horse();
+  sammy.move();
+  tommy.move(34);
+
+   let snake = new Snake("Johny the Black mamba");
+   let horse: Animal = new Horse("Romy the Thoroughbred");
+  snake.move(10);
+  horse.move();
