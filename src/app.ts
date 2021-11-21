@@ -1,23 +1,16 @@
-const button=document.querySelector("button")!;
-const input1=document.getElementById("num1")! as HTMLInputElement;
-const input2=document.getElementById("num2")! as HTMLInputElement;
-//Example of Typescript types: number,boolean,string
-function add(num1:number,num2:number,showResult:boolean,phrse:string){
-    const result=num1+num2;
-    if(showResult){
-        console.log(phrse+result);
-    }else{
-        return result;
-    }
-}
-let number1:number;
-number1=5;
-const number2=2.8;
-const printResult=true;
-let resultPhrase='Result is: ';
+//Object type
+const person:object={
+name:"Dhananjay",
+age:23
+};
+console.log(person);
+// console.log(person.name);//compile error Property 'name' does not exist on type 'object'.ts(2339)
 
-// button.addEventListener("click", function(){
-// console.log();
-// });
-
-add(number1,number2,printResult,resultPhrase);
+const student:{
+    name:string;
+    age:number;
+}={
+    name:"John",
+    age:24
+    };
+console.log(student.name);
