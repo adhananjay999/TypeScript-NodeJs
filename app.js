@@ -1,4 +1,3 @@
-// const button=document.getElementById("add");
 var button = document.querySelector("button");
 var input1 = document.getElementById("num1");
 var input2 = document.getElementById("num2");
