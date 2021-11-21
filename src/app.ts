@@ -1,7 +1,15 @@
-//union type and literal type
 enum ResultConversion {As_Number="as-number",As_Text="as-text"}
 
-function combine(input1:number|string,input2:number|string,resultConversion:ResultConversion.As_Number|ResultConversion.As_Text){
+//Alias
+type Combinable=number|string;
+type ConversionDescriptor=ResultConversion.As_Number|ResultConversion.As_Text;
+
+//union type and literal type
+function combine(
+    input1:Combinable,
+    input2:Combinable,
+    resultConversion:ConversionDescriptor,
+    ){
     let result;
     // result= input1+input2;//!!!Error Operator '+' cannot be applied to types 'string | number' and 'string | number'.ts(2365)
     if(typeof input1=="number"&&typeof input2=="number" ||resultConversion==ResultConversion.As_Number){
