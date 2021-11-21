@@ -21,6 +21,7 @@ console.log(book);
 
 //enum type
 enum Role {ADMIN,READ_ONLY,AUTHOR};
+enum Department {CSE="Computer Sciemnce",ENTC="Electronics and telecommunication", MECH="Mechanicle"};
 
 const student:{
     name:string;
