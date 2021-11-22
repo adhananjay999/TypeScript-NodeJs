@@ -1,3 +1,6 @@
+//Example 1: Hello World
+var message='Hello World';
+console.log(message);
 
 //Example 2 : Function
 function sayHello(name: string): void {
