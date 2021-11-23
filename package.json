@@ -2,9 +2,15 @@
   "name": "understanding-ts",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lite-server": "^2.6.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {},
   "scripts": {
-    "start": "tsc && lite-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -15,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/adhananjay999/TypeScript-NodeJs/issues"
   },
-  "homepage": "https://github.com/adhananjay999/TypeScript-NodeJs#readme",
-  "devDependencies": {
-    "lite-server": "^2.6.1"
-  }
+  "homepage": "https://github.com/adhananjay999/TypeScript-NodeJs#readme"
 }
