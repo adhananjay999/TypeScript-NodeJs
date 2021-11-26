@@ -1,30 +1,30 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router();// Initialize express router
 
-// GET request
-router.get("/", (req, res) => {
-  res.status(200).send("Server is up and running.");
+// Set default API response
+router.get('/', function (req, res) {
+    res.json({
+        status: 'API Its Working',
+        message: 'Welcome to RESTHub crafted with love!'
+    });
 });
+// Export API routes
+module.exports = router;
+//import controller
 
-router.get("/specific", (req, res) => {
-  res.status(200).send("Specific Post");
-});
+const controller=require('../controller/postControlles');
+// // GET request
+// router.get("/", (req, res) => {
+//   res.status(200).send("Server is up and running.");
+// });
 
-// POST request
-router.post("/", async (req, res) => {
-  res.status(200).send("This is a POST request");
-});
+// router.get("/specific", (req, res) => {
+//   res.status(200).send("Specific Post");
+// });
 
-// PUT Request
-router.put("/", (req, res) => {
-  res.status(200).send("This is a PUT request");
-});
-// PATCH Request
-router.patch("/", (req, res) => {
-  res.status(200).send("This is a PATCH request");
-});
-// DELETE Request
-router.delete("/", (req, res) => {
-  res.status(200).send("This is a DELETE request");
-});
+router.post("/api/posts",controller.create);  
+router.get("/api/posts", controller.find);  
+router.put("/api/posts/:id", controller.update);  
+router.delete("/api/posts/:id", controller.delete);  
+ 
 module.exports = router;
