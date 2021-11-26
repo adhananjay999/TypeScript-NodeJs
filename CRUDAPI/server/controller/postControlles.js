@@ -68,4 +68,22 @@ exports.update = (req, res) => {
     }); 
 };
 //delete a post with specific post is in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+    const id = req.params.id;
+Posts.findByIdAndDelete(id)
+.then(data=>{
+    if(!data){
+        res.status(404).send({
+         message: `Can not delete post with ${id}. Maybe postId is wrong`,
+        });
+    }else{
+        res.send(data);
+    }
+})
+.catch(err=>{
+    res.status(500).send({
+        message: `Could not delete post with id= ${id}`,
+      });
+});
+
+};
