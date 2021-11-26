@@ -42,16 +42,18 @@ exports.find = (req, res) => {
       });
     });
 };
+
 //update a new identified post by post id
 exports.update = (req, res) => {
-    console.log(req.params.id);
+  console.log(req.params.id);
   if (!req.body) {
     res.status(400).send({
       message: "Data to update cannot be empty",
     });
   }
   const id = req.params.id;
-  Posts.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  const options={new:true};
+  Posts.findByIdAndUpdate(id, req.body,options)
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -65,25 +67,30 @@ exports.update = (req, res) => {
       res.status(500).send({
         message: err.message || "Error while update post",
       });
-    }); 
+    });
 };
 //delete a post with specific post is in the request
 exports.delete = (req, res) => {
-    const id = req.params.id;
-Posts.findByIdAndDelete(id)
-.then(data=>{
-    if(!data){
+  const id = req.params.id;
+  Posts.findByIdAndDelete(id)
+    .then((data) => {
+      if (!data) {
         res.status(404).send({
-         message: `Can not delete post with ${id}. Maybe postId is wrong`,
+          message: `Can not delete post with ${id}. Maybe postId is wrong`,
         });
-    }else{
-        res.send(data);
-    }
-})
-.catch(err=>{
-    res.status(500).send({
+      } else {
+      //   res.status(204).json({
+      //     status: "success",
+      //     message: 'Contact deleted'
+      // });
+        res.status(204).send({
+          message: `Post deleted`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
         message: `Could not delete post with id= ${id}`,
       });
-});
-
+    });
 };
