@@ -31,7 +31,15 @@ exports.create = (req, res) => {
 
 //retrive and return all postr / retrive and return single post
 exports.find = (req, res) => {
-  
+    Posts.find()
+    .then((post) => {
+      res.send(post);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Something went wrong while adding new post",
+      });
+    });
 };
 //update a new identified post by post id
 exports.update = (req, res) => {};
