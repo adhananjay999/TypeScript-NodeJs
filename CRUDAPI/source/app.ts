@@ -5,7 +5,7 @@ import {PostsRoutes} from "./routes/posts-routes-config";
 import "dotenv/config";
 import config from "./config/database/config";
 import mongoose from "mongoose";
-import Logger from "./config/lib/logger";
+import Logger from "./config/logger/logger-config";
 import { CommonRoutesConfig } from "./routes/common/common-routes-config";
 import debug from "debug";
 
