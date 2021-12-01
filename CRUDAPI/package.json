@@ -1,8 +1,8 @@
 {
-  "name": "CRUDAPI",
+  "name": "crud-api",
   "version": "1.0.0",
   "description": "",
-  "main": "source/server.ts",
+  "main": "source/app.ts",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
@@ -20,8 +20,8 @@
     "typescript": "^4.5.2"
   },
   "scripts": {
-    "start": "ts-node source/server.ts",
-    "dev": "nodemon source/server.ts",
+    "start": "ts-node source/app.ts",
+    "dev": "nodemon source/app.ts",
     "build": "rm -rf build/ --write source/ && tsc"
   },
   "keywords": [],
