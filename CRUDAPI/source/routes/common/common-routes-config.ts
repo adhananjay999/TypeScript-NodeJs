@@ -11,5 +11,6 @@ export abstract class CommonRoutesConfig {
     getName() {
         return this.name;
     }
-    abstract configureRoutes(): express.Application;
+    abstract configureRoutes(): express.Application;// This forces any class extending CommonRoutesConfig to provide an implementation matching that signature—if it doesn’t, the TypeScript compiler will throw an error.
+
 }

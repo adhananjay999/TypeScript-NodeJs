@@ -7,7 +7,6 @@ import config from "./config/database/config";
 import mongoose from "mongoose";
 import Logger from "./config/logger/logger-config";
 import { CommonRoutesConfig } from "./routes/common/common-routes-config";
-import debug from "debug";
 
 const app: Application = express();
 
@@ -43,20 +42,10 @@ const routes: Array<CommonRoutesConfig> = [];
 // here we are adding the UserRoutes to our array,
 // after sending the Express.js application object to have the routes added to our app!
 routes.push(new PostsRoutes(app));
+
 // /** Error handling */
 // app.use((req, res, next) => {
 //   const error = new Error("not found");
 //   return res.status(404).json({ message: error.message });
 // });
 
-/// Print API errors
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  Logger.error(err.message, err);
-  return res.status(400).json({
-    error: err.message,
-  });
-});
-// app.use(handleError);
-
-const debugLog: debug.IDebugger = debug("app");

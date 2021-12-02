@@ -8,7 +8,7 @@
 // export = router;
 
 import { CommonRoutesConfig } from "./common/common-routes-config";
-import { Application, Request, Response, NextFunction } from "express";
+import { Application } from "express";
 import controller from "../controllers/post";
 
 export class PostsRoutes extends CommonRoutesConfig {
