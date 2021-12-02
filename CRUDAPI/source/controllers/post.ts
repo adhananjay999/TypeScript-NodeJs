@@ -1,20 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import Logger from "../config/logger/logger-config";
-import Post from "../models/post";
 import { JSONResponse } from "../lib/json-response";
+import { PostsService } from "../services/posts";
+import IPost from "../interfaces/post";
 // adding a post
 const addPost = async (req: Request, res: Response, next: NextFunction) => {
   // get the data from req.body
-  let { title, body } = req.body;
-  // add the post and return response
-  const post = new Post({
-    // _id: new mongoose.Types.ObjectId(),
-    title,
-    body,
-  });
+  let post: IPost = req.body;
+
   try {
-    let result = await post.save();
-    JSONResponse.success(res, result, 201);
+    let result = await PostsService.createPost(post);
+    JSONResponse.success(res, 201, result);
   } catch (error) {
     if (error instanceof Error) {
       JSONResponse.serverError(res, error?.message);
@@ -25,8 +21,8 @@ const addPost = async (req: Request, res: Response, next: NextFunction) => {
 // getting all posts
 const getPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let result = await Post.find().exec();
-    JSONResponse.success(res, result, 200);
+    let result = await PostsService.getAllPosts();
+    JSONResponse.success(res, 200, result);
   } catch (error) {
     if (error instanceof Error) {
       JSONResponse.serverError(res, error?.message);
@@ -41,12 +37,13 @@ const getPost = async (req: Request, res: Response, next: NextFunction) => {
   Logger.info(`id : ${postId}`);
   // get the post and return response
   try {
-    let result = await Post.findById(postId);
+    let result = await PostsService.getSpecificPost(postId);
+
     if (!result) {
       let errMessage = `Post not found`;
       JSONResponse.serverError(res, errMessage, 404);
     } else {
-      JSONResponse.success(res, result, 200);
+      JSONResponse.success(res, 200, result);
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -59,16 +56,16 @@ const getPost = async (req: Request, res: Response, next: NextFunction) => {
 const updatePost = async (req: Request, res: Response, next: NextFunction) => {
   // update the post and return response
   try {
-    let { title, body } = req.body;
+    let content: { title: String; body: String } = req.body;
     // get the post id from the req.params
-    const id: string = req.params.id;
-    let options = { new: true };
-    let result = await Post.findByIdAndUpdate(id, req.body, options);
+    const id: string = req.params.postId;
+    let result = await PostsService.updateSpecificPost(id, content);
+
     if (!result) {
       let errMessage = `Can not update post with ${id}. Maybe post not found`;
       JSONResponse.serverError(res, errMessage, 404);
     } else {
-      JSONResponse.success(res, result, 200);
+      JSONResponse.success(res, 200, result);
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -82,13 +79,14 @@ const deletePost = async (req: Request, res: Response, next: NextFunction) => {
   // delete the post and return response
   try {
     // get the post id from req.params
-    const id: string = req.params.id;
-    let result = await Post.findByIdAndDelete(id);
+    const id: string = req.params.postId;
+    let result = await PostsService.deleteSpecificPost(id);
     if (!result) {
       let errMessage = `Can not delete post with ${id}. Maybe postId is wrong`;
       JSONResponse.serverError(res, errMessage, 404);
     } else {
-      JSONResponse.success(res, result, 200, "post deleted successfully");
+      let noResult;
+      JSONResponse.success(res, 200, noResult, "post deleted successfully");
     }
   } catch (error) {
     if (error instanceof Error) {

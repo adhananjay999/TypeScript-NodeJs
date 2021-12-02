@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
 export class JSONResponse {
   constructor() {
@@ -6,10 +6,9 @@ export class JSONResponse {
   }
   static success(
     res: Response,
-    data?: any,
     statusCode?: number,
+    data?: any,
     message?: String,
-    req?: Request
   ) {
     res.status(statusCode || 200).json({
       message: message,
@@ -22,7 +21,6 @@ export class JSONResponse {
     message: String,
     statusCode?: number,
     data?: any,
-    req?: Request
   ) {
     res.status(statusCode || 500).json({
       message: message || "Internal Server Error",
